@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>查询数据系列问题</title>
+      <link href="/2022/11/12/cha-xun-shu-ju-xi-lie-wen-ti/"/>
+      <url>/2022/11/12/cha-xun-shu-ju-xi-lie-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="查询数据系列问题"><a href="#查询数据系列问题" class="headerlink" title="查询数据系列问题"></a>查询数据系列问题</h1><h3 id="fetchDate"><a href="#fetchDate" class="headerlink" title="fetchDate"></a>fetchDate</h3><pre class="line-numbers language-none"><code class="language-none">JsonObject fetchData = detailS.fetchData(DetailDao, Detail.class,new CustomFormatRow&lt;Detail&gt;() {@Overridepublic void formatRow(Detail detail, SearchRow row) {}                    }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="fetchList"><a href="#fetchList" class="headerlink" title="fetchList"></a>fetchList</h3><pre class="line-numbers language-none"><code class="language-none">List&lt;Proplan&gt; proplanlist = proplanS.fetchList(proplanDao, Proplan.class);Proplan proplan = null;if(proplanlist!=null &amp;&amp; proplanlist.size()==1) {proplan  = proplanlist.get(0);}    if(proplan!=null) {}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="findOne"><a href="#findOne" class="headerlink" title="findOne"></a>findOne</h3><pre class="line-numbers language-none"><code class="language-none">for (int i = 0; i &lt; selectRows.size(); i++) {DxRecord dxRecord2 = dxRecordDao.findOne(selectRows.get(i));    }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">CoatingPlan paintingPlan = planService.findOne(dxDetail.getProplanid());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">DxDetail undetail = dxuncoilDao.findOne(t.getDxdetailid());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="自定义方法"><a href="#自定义方法" class="headerlink" title="自定义方法"></a>自定义方法</h3><pre class="line-numbers language-none"><code class="language-none">@Query(value="SELECT beizhu FROM upcoiler WHERE gunum = ?1 LIMIT 1 ",nativeQuery=true)String getSxsjrecord(String rzgunum);String sxsjbeizhu = sxproductDetailDao.getSxsjrecord(detail.getRzgunum());row.add("sxsjrecord", sxsjbeizhu);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">public DxRecord findByGunum(String gunum) {return dxDao.findByGunum(gunum);DxRecord dxRecord = dxRecordService.findByGunum(t.getDxgunum());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 需求，学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java 中 Boolean 和 boolean的区别</title>
       <link href="/2022/11/12/boolean-yu-boolean-de-qu-bie/"/>
       <url>/2022/11/12/boolean-yu-boolean-de-qu-bie/</url>
