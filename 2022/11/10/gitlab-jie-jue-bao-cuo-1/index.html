@@ -4,9 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="test, CC Zhang de 菜鸟日记">
-    <meta name="description" content="
-">
+    <meta name="keywords" content="gitlab解决报错1, CC Zhang de 菜鸟日记">
+    <meta name="description" content="gitlab报错出现的错误
+
+
+
+分析错误原因根据日志可以分析出来，在我进行thirdproduct项目向master合并之前，其他同事已经提交过一次项目了，但在我提交之前没有重新拉取该项目，导致流水线在跑的时候在我的项目中找不到对应的方法">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>test | CC Zhang de 菜鸟日记</title>
+    <title>gitlab解决报错1 | CC Zhang de 菜鸟日记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -769,12 +772,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">test</h1>
+                    <h1 class="description center-align post-title">gitlab解决报错1</h1>
                 </div>
             </div>
         </div>
@@ -796,9 +799,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/gitlab%EF%BC%8C%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%8A%A5%E9%94%99/">
+                                <span class="chip bg-color">gitlab，学习，报错</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -810,7 +817,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-09
+                    2022-11-10
                 </div>
                 
 
@@ -834,8 +841,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="/.io//11/09/test/chenjiale.jpg" alt="jiale"></p>
-<!-- <img src="/2022/11/09/test/chenjiale.jpg" class="" title="This is an image"> -->
+                <h1 id="gitlab报错"><a href="#gitlab报错" class="headerlink" title="gitlab报错"></a>gitlab报错</h1><h2 id="出现的错误"><a href="#出现的错误" class="headerlink" title="出现的错误"></a>出现的错误</h2><p><img src="/.io//1.png" alt="gitlab解决报错1"></p>
+<!-- <img src="gitlab解决报错1/日志分析.png"> -->
+
+<hr>
+<h3 id="分析错误原因"><a href="#分析错误原因" class="headerlink" title="分析错误原因"></a>分析错误原因</h3><p>根据日志可以分析出来，在我进行thirdproduct项目向master合并之前，其他同事已经提交过一次项目了，但在我提交之前没有重新拉取该项目，导致流水线在跑的时候在我的项目中找不到对应的方法所以报错。</p>
+<h3 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h3><p>查找到错误出现的原因之后得出，我远端的practice和master中的代码不一致，所以要拉取master的最新代码对本地practice进行更新，然后将更新之后的practice推送至远端的practice，这样远端提交过得practice分支里边的代码就和master中的代码一致了，然后再进行retry。<br><img src="/.io//2.png" alt="gitlab解决报错1"></p>
+<hr>
+<h3 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h3><ul>
+<li>我本次提交的为dlx的标签上的修改，文件为html文件，所以在pre流水线跑完报错之后，“合并”按钮是红色的，不是灰色的，这是因为我所提交的不是业务代码，所以允许被强制提交，但是不可以进行强制提交。</li>
+<li>注意进行推送的时候，一定要清楚地知道“为什么要推送”，这次我推送的原因是为了更新远端的practice，所以选择practice。若是选择master则会覆盖master的代码。</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -861,7 +878,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangchunjia.github.io/2022/11/09/test/">https://zhangchunjia.github.io/2022/11/09/test/</a>
+                    <a href="https://zhangchunjia.github.io/2022/11/10/gitlab-jie-jue-bao-cuo-1/">https://zhangchunjia.github.io/2022/11/10/gitlab-jie-jue-bao-cuo-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -898,7 +915,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/gitlab%EF%BC%8C%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%8A%A5%E9%94%99/">
+                                    <span class="chip bg-color">gitlab，学习，报错</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -980,13 +1001,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/11/09/test/">
+                <a href="/2022/11/10/gitlab-jie-jue-bao-cuo-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="gitlab解决报错1">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title">gitlab解决报错1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -997,7 +1018,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-10
                             </span>
                         <span class="publish-author">
                             
@@ -1008,6 +1029,14 @@
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/gitlab%EF%BC%8C%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%8A%A5%E9%94%99/">
+                        <span class="chip bg-color">gitlab，学习，报错</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
