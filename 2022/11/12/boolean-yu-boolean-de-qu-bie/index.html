@@ -856,7 +856,7 @@ public void setIschangespec(Boolean ischangespec) {
 	this.ischangespec = ischangespec;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>增加以上字段之后，经过改扎的数据不会在不生产明细中显示。</p>
+<p>增加以上字段之后，经过改轧的数据不会在生产明细中显示。</p>
 <hr>
 <h2 id="出现问题的原因"><a href="#出现问题的原因" class="headerlink" title="出现问题的原因"></a>出现问题的原因</h2><ul>
 <li><code>boolean</code> 是 <code>Java</code> 的基本数据类型，<code>Boolean</code> 是 <code>Java</code> 的一个类。<code>boolean</code> 类型会在<code>“赋零值”</code>阶段给属性赋 <code>false</code>。而 <code>Boolean</code> 是一个类，会在<code>“赋零值”</code>阶段给对象赋 <code>null</code>。如果是静态属性，会在类加载时被赋值。如果是普通类属性，会在实例化对象时赋值。</li>
