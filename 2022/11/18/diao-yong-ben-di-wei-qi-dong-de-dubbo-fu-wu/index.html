@@ -923,14 +923,16 @@ at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h4 id="解决措施及useSSL-x3D-false与useSSL-x3D-true的区别。"><a href="#解决措施及useSSL-x3D-false与useSSL-x3D-true的区别。" class="headerlink" title="解决措施及useSSL=false与useSSL=true的区别。"></a>解决措施及useSSL=false与useSSL=true的区别。</h4><p>在<code>mysql</code>进行连接的时候,如果<code>mysql</code>的版本是<code>5.7</code>之后的版本必须要加上<code>useSSL=false</code>,<code>mysql5.7</code>以及之前的版本则不用进行添加<code>useSSL=false</code>，会默认为<code>false</code>，一般情况下都是使用<code>useSSL=false</code>，尤其是在将项目部署到<code>linux</code>上时，一定要使用<code>useSSL=false</code>！！！，<code>useSSL=true</code>是进行安全验证，一般通过证书或者令牌什么的，<code>useSSL=false</code>就是通过账号密码进行连接，通常使用<code>useSSL=false</code>.</p>
-<h2 id="dubbo错误"><a href="#dubbo错误" class="headerlink" title="dubbo错误"></a>dubbo错误</h2><p><img src="/2022/11/18/diao-yong-ben-di-wei-qi-dong-de-dubbo-fu-wu/4.png"></p>
-<h3 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h3><p><code>dubbo</code>只注册：设置为<code>false</code>为禁止注册。</p>
+<h2 id="3-dubbo错误"><a href="#3-dubbo错误" class="headerlink" title="3.dubbo错误"></a>3.dubbo错误</h2><p><img src="/2022/11/18/diao-yong-ben-di-wei-qi-dong-de-dubbo-fu-wu/4.png"></p>
+<h3 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h3><p>dubbo只注册：设置为<code>false</code>为禁止注册。</p>
 <h3 id="解决措施-1"><a href="#解决措施-1" class="headerlink" title="解决措施"></a>解决措施</h3><p>将<code>false</code>改为<code>true</code>。</p>
-<h3 id="dubbo只注册"><a href="#dubbo只注册" class="headerlink" title="dubbo只注册"></a><code>dubbo</code>只注册</h3><ul>
+<h3 id="dubbo只注册"><a href="#dubbo只注册" class="headerlink" title="dubbo只注册"></a>dubbo只注册</h3><ul>
 <li><p>只订阅的含义就是当前应用只会消费所需接口，就算有提供接口，也不会注册到注册中心。</p>
 </li>
-<li><p>配置形式：默认值都是<code>true</code>，<code>false</code> 表示禁止注册<br>```<br><br>    dubbo.provider.register=false<br><br>    dubbo.registry.register=false<br><br>    dubbo.protocol.register=false</p>
-</li>
+<li><p>配置形式：默认值都是<code>true</code>，<code>false</code> 表示禁止注册</p>
+ <pre class="line-numbers language-none"><code class="language-none"> dubbo.provider.register=false
+dubbo.registry.register=false
+dubbo.protocol.register=false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <p>上面三个配置都会禁止注册当前应用的所有接口到注册中心，即使我们在接口上显示<code>@DubboService(register = true)</code>,也不会注册接口到注册中心。</p>
 
