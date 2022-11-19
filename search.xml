@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>轴承清洗提示需求</title>
+      <link href="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/"/>
+      <url>/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在研磨管理模块中，轴承在维护两个周期后，维护的里程不变，轴承长时间在工作中容易在使用中疲劳损坏。因此该项需求为在轴承使用的两个周期后，1200工作辊轴承维护里程12000km，变为10000km；1200中间辊轴承维护里程15000km，变为12000km；1380工作辊轴承维护里程18000km，变为13000km；1380中间辊轴承维护里程18000km，变为13000km；轴承更换后，从头计算里程数。</p><h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><h2 id="1-分析需求，梳理逻辑"><a href="#1-分析需求，梳理逻辑" class="headerlink" title="1.分析需求，梳理逻辑"></a>1.分析需求，梳理逻辑</h2><ul><li>该需求是想在原来清洗提示的基础上实现轴承在运转两个周期后，缩小轴承清洗提示的里程，那么就需要一个字段来统计某个轴承在进行更换之前的清次数</li><li>该需求需要在轴承更换之后从头计算里程数，但是如果直接在现有的数据库表中操作势必会污染其他的数据，所以选择新建一张物理表。</li><li>轴承往往是成对使用所以在数据字典中每一个对应编号下的轴承都是成对出现，辊又分为工作辊和中间辊，注意工作辊对应有上辊和下辊。所以我们在进行需求开发的时候是通过轴承座号来查找对应的中间辊和工作辊。</li></ul><h2 id="2-确定字段"><a href="#2-确定字段" class="headerlink" title="2.确定字段"></a>2.确定字段</h2><ul><li>轴承清洗提示这个需求我们需要的字段有必须的id、version，查询辊对应的轴承座号，以及新增的统计轧辊统共清洗字数的字段,其他字段不牵扯所以省略。</li></ul><h3 id="1-设计物理表，编写实体"><a href="#1-设计物理表，编写实体" class="headerlink" title="1.设计物理表，编写实体"></a>1.设计物理表，编写实体</h3><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/1.png" alt="物理表"></p><ul><li>注意所标识ID，可自动生成。</li></ul><h2 id="3-设计Service方法"><a href="#3-设计Service方法" class="headerlink" title="3.设计Service方法"></a>3.设计Service方法</h2><h3 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h3><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/2.png" alt="Service-新建数据并保存"><br><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/3.png" alt="Dao-根据轴承座号查询出对应轧辊的清洗次数"></p><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/4.png" alt="“清洗”操作调用该方法"></p><ul><li>1.根据第一部分代码可以得出已经是筛选出了不在清洗进程的数据，所以根据这部分数据我可以获取到我想要的轴承座号。</li><li>2.根据得到的轴承座号去调用我所写的方法，获取到每个轴承座号对应的轧辊的清洗次数。</li><li>PS：在轧辊持续工作的进程中，肯定会有部分轧辊已经存在所建的数据表中，那么这部分数据不需要进行新建记录，而是更新。</li></ul><h3 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h3><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/5.png" alt="Dao"></p><ul><li>利用<code>dao</code>层来编写查询和更新语句。</li></ul><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/6.png" alt="Service"></p><ul><li>通过编写<code>sql</code>语句通过轴承座号来查询数据库中的数据，如果该轴承座号已存在与数据库表，那么查询他对应的轧辊清洗记录，并通过生气了语句进行更新操作，若不存在该条数据，则进行新建数据。</li></ul><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/7.png"></p><ul><li>在轴承清洗提示业务代码中新增sql语句用来查询cleanfrequency表中的清洗次数并通过该字段进行判断轴承提示里程的变更。</li><li>在轴承进行清洗提示代码中添加同样的判断。</li><li>在轴承确定更换之后根据轴承座号将cleanfrequency对应的数据删除，装配记录明细表中对应的使用里程置零。</li></ul><h2 id="测试与总结"><a href="#测试与总结" class="headerlink" title="测试与总结"></a>测试与总结</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>调用本地未启用的dubbo服务</title>
       <link href="/2022/11/18/diao-yong-ben-di-wei-qi-dong-de-dubbo-fu-wu/"/>
       <url>/2022/11/18/diao-yong-ben-di-wei-qi-dong-de-dubbo-fu-wu/</url>
