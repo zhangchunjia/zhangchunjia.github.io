@@ -863,11 +863,16 @@
 </ul>
 <p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/7.png"></p>
 <ul>
-<li>在轴承清洗提示业务代码中新增sql语句用来查询cleanfrequency表中的清洗次数并通过该字段进行判断轴承提示里程的变更。</li>
+<li>在轴承清洗提示业务代码中新增sql语句用来查询<code>cleanfrequency</code>表中的清洗次数并通过该字段进行判断轴承提示里程的变更。</li>
 <li>在轴承进行清洗提示代码中添加同样的判断。</li>
-<li>在轴承确定更换之后根据轴承座号将cleanfrequency对应的数据删除，装配记录明细表中对应的使用里程置零。</li>
+<li>在轴承确定更换之后根据轴承座号将<code>cleanfrequency</code>对应的数据删除，装配记录明细表中对应的使用里程置零。</li>
 </ul>
-<h2 id="测试与总结"><a href="#测试与总结" class="headerlink" title="测试与总结"></a>测试与总结</h2>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="1-需要注意的问题"><a href="#1-需要注意的问题" class="headerlink" title="1.需要注意的问题"></a>1.需要注意的问题</h3><p><img src="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/8.png" alt="语法格式"></p>
+<ul>
+<li>编写的<code>sql</code>语句无法调用，但在数据库上可以<code>update</code>，原因是等号左右两边没有留下空格，属于语法错误。</li>
+</ul>
+<h3 id="2-需求总结"><a href="#2-需求总结" class="headerlink" title="2.需求总结"></a>2.需求总结</h3><p>在学习新的业务代码的时候要注意方法或者某些业务代码有写入的地方一定就会有读取的地方，无论是新建或者更新都是在写入，都会有对应业务要调取的地方。</p>
+
                 
             </div>
             <hr/>
