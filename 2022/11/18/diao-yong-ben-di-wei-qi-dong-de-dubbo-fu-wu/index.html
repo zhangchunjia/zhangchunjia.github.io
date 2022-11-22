@@ -935,6 +935,10 @@ dubbo.registry.register=false
 dubbo.protocol.register=false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <p>上面三个配置都会禁止注册当前应用的所有接口到注册中心，即使我们在接口上显示<code>@DubboService(register = true)</code>,也不会注册接口到注册中心。</p>
+<hr>
+<h1 id="知识更新"><a href="#知识更新" class="headerlink" title="知识更新"></a>知识更新</h1><ul>
+<li><code>dubbo</code>设置成<code>false</code>表达的含义为不主动对外暴露，是为了避免本地对业务逻辑修改时，如果本地的<code>dubbo</code>服务对外暴露，由于注册中心分配调用的提供者无法指定，因为会导致其他人调用到自己的<code>dubbo</code>服务。设置成不暴露后依旧可以通过直接指定<code>ip：端口</code>调起。</li>
+</ul>
 
                 
             </div>
