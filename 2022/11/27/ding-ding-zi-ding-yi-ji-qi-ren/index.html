@@ -4,12 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="轴承清洗测试及问题修改, CC Zhang de 菜鸟日记">
-    <meta name="description" content="轴承清洗测试及问题修改问题1遇到的问题：
-轴承座号存在父节点和子节点，在调用之前写的方法的时候取得是轴承座号的父节点，但是根据这个父节点无法在清洗记录里查找到数据，一个父节点可能对应的是两个子节点或者四个父节点。
+    <meta name="keywords" content="钉钉开放平台-自定义机器人的接入, CC Zhang de 菜鸟日记">
+    <meta name="description" content="钉钉自定义机器人的接入钉钉自定义机器人本地配置文件中修改钉钉机器人token与secret
+修改本地配置文件，修改研磨一、二期的token与secret，可以实现在本地测试钉钉机器人发送消息。
 
-解决问题思路：
-在装配记">
+Service注入钉钉机器人token与se">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>轴承清洗测试及问题修改 | CC Zhang de 菜鸟日记</title>
+    <title>钉钉开放平台-自定义机器人的接入 | CC Zhang de 菜鸟日记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -772,12 +771,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">轴承清洗测试及问题修改</h1>
+                    <h1 class="description center-align post-title">钉钉开放平台-自定义机器人的接入</h1>
                 </div>
             </div>
         </div>
@@ -813,7 +812,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-25
+                    2022-11-27
                 </div>
                 
 
@@ -837,61 +836,31 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="轴承清洗测试及问题修改"><a href="#轴承清洗测试及问题修改" class="headerlink" title="轴承清洗测试及问题修改"></a>轴承清洗测试及问题修改</h1><h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><h3 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h3><ul>
-<li>轴承座号存在父节点和子节点，在调用之前写的方法的时候取得是轴承座号的父节点，但是根据这个父节点无法在清洗记录里查找到数据，一个父节点可能对应的是两个子节点或者四个父节点。</li>
+                <h1 id="钉钉自定义机器人的接入"><a href="#钉钉自定义机器人的接入" class="headerlink" title="钉钉自定义机器人的接入"></a>钉钉自定义机器人的接入</h1><h2 id="钉钉自定义机器人"><a href="#钉钉自定义机器人" class="headerlink" title="钉钉自定义机器人"></a>钉钉自定义机器人</h2><h3 id="本地配置文件中修改钉钉机器人token与secret"><a href="#本地配置文件中修改钉钉机器人token与secret" class="headerlink" title="本地配置文件中修改钉钉机器人token与secret"></a>本地配置文件中修改钉钉机器人token与secret</h3><ul>
+<li>修改本地配置文件，修改研磨一、二期的token与secret，可以实现在本地测试钉钉机器人发送消息。<br><img src="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/3.png" alt="图一"></li>
 </ul>
-<h3 id="解决问题思路："><a href="#解决问题思路：" class="headerlink" title="解决问题思路："></a>解决问题思路：</h3><ul>
-<li>在装配记录中轴承座号是以父节点存在的，但清洗的时候是根据<code>classify</code>获取到轴承座号对应的子节点来进行清洗记录的创建，所以可以把调用的方法放在循环创建子节点对应的方法中，循环在<code>cleanfrequency</code>创建或者新增子节点的数据。</li>
+<h3 id="Service注入钉钉机器人token与secret"><a href="#Service注入钉钉机器人token与secret" class="headerlink" title="Service注入钉钉机器人token与secret"></a>Service注入钉钉机器人token与secret</h3><p><img src="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/2.png" alt="图二"></p>
+<h3 id="Service钉钉机器人发送消息"><a href="#Service钉钉机器人发送消息" class="headerlink" title="Service钉钉机器人发送消息"></a>Service钉钉机器人发送消息</h3><p><img src="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/1.png" alt="图三"></p>
+<h3 id="添加钉钉机器人"><a href="#添加钉钉机器人" class="headerlink" title="添加钉钉机器人"></a>添加钉钉机器人</h3><ul>
+<li>在钉钉中添加机器人时，注意安全设置中ip字段等相关配置。完成安全设置后，复制出机器人的Webhook地址，可用于向这个群发送消息，格式如下：<pre class="line-numbers language-none"><code class="language-none">https://oapi.dingtalk.com/robot/send?access_token=XXXXXX<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<h3 id="解决措施："><a href="#解决措施：" class="headerlink" title="解决措施："></a>解决措施：</h3><p><img src="/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/1.png" alt="图1"></p>
-<ul>
-<li>红框1：根据父节点查找到<code>classify</code>中对应的子节点，然后进行清洗记录的新建</li>
-<li>红框2：调用<code>CopyCleanout</code>方法获取子节点进行在<code>cleanfrequency</code>表中的创建或更新</li>
-<li>红框3：原来是想要根据子节点获取到对应的父节点，再调用<code>CopyCleanout</code>方法，但是牵扯到轴承更换的问题。轴承更换是在清洗记录里对子节点的轴承进行更换，后续要根据是否更换(isreplace)来对清洗次数和使用里程进行关操作，所以这部分代码不适用。</li>
+<h3 id="使用钉钉机器人"><a href="#使用钉钉机器人" class="headerlink" title="使用钉钉机器人"></a>使用钉钉机器人</h3><ul>
+<li><p>获取到Webhook地址后，用户可以向这个地址发起HTTP POST 请求，即可实现给该钉钉群发送消息。</p>
+</li>
+<li><p>PS：</p>
+</li>
+<li><p>1.发起POST请求时，必须将字符集编码设置成UTF-8。</p>
+</li>
+<li><p>2.每个机器人每分钟最多发送20条。消息发送太频繁会严重影响群成员的使用体验，大量发消息的场景 (譬如系统监控报警) 可以将这些信息进行整合，通过markdown消息以摘要的形式发送到群里。</p>
+</li>
 </ul>
-<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><h3 id="遇到的问题：-1"><a href="#遇到的问题：-1" class="headerlink" title="遇到的问题："></a>遇到的问题：</h3><ul>
-<li>轴承更换之后根据需求要将此轴承对应的清洗记录清空，将该轴承对应的使用里程清空。</li>
-</ul>
-<h3 id="解决问题思路：-1"><a href="#解决问题思路：-1" class="headerlink" title="解决问题思路："></a>解决问题思路：</h3><ul>
-<li>在轴承更换之后，将<code>cleanfrequency</code>中该轴承对应的清洗记录次数清零，轴承的使用里程稍微麻烦一点，在轴承清洗提示的时候轴承的使用里程是从<code>assembly</code>中取出来，然后赋值给明细表，清洗记录里边的轴承使用里程是有明细表获取到的，所以在轴承更换之后要清空的是<code>assembly</code>中的使用里程。</li>
-<li>首先在<code>cleanout</code>中有一个<code>detailid</code>，根据这个id可以在明细表中查询到对应的数据，然后明细表中有一个<code>assemblyid</code>字段，根据这个字段又可以在<code>assembly</code>中查询到对应的数据，最后进行对使用里程的清零操作就可以了。</li>
-</ul>
-<h3 id="解决措施：-1"><a href="#解决措施：-1" class="headerlink" title="解决措施："></a>解决措施：</h3><p><img src="/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/2.png" alt="图2"></p>
-<h3 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h3><ul>
-<li>最初要修改的使用里程错认为明细表里的使用里程，整理了一下根据现有信息从明细表里查询数据的方法。</li>
-</ul>
-<h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><pre class="line-numbers language-none"><code class="language-none">AssemblyDetailS assemblyDetailS = new AssemblyDetailS();
-		 assemblyDetailS.setId(cleanout.getDetailid());
-		 List&lt;AssemblyDetail&gt; assemblydlist = assemblyDetailS.fetchList(assemblyDetailDao, AssemblyDetail.class);
-		 AssemblyDetail assemblyDetail = null;
-		 if(assemblydlist!=null &amp;&amp; assemblydlist.size()==1) {
-			 assemblyDetail = assemblydlist.get(0);
-		 }
-		 if(assemblyDetail!=null) {
-			 assemblyDetail.setUsemileage(String.valueOf(0));
-		 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><pre class="line-numbers language-none"><code class="language-none">List&lt;AssemblyDetail&gt; assemblydlist = assemblyDetailDao.search(cleanout.getDetailid());
-AssemblyDetail assemblyDetail = null; 
-if(assemblydlist!=null &amp;&amp; assemblydlist.size()==1) {
- assemblyDetail = assemblydlist.get(0);
-}
-if(assemblyDetail!=null) {
- assemblyDetail.setUsemileage(String.valueOf(0));
-}
-         <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><pre class="line-numbers language-none"><code class="language-none">AssemblyDetail findshuju2 = assemblyDetailDao.findOne(cleanout.getDetailid());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h2><h3 id="遇到的问题：-2"><a href="#遇到的问题：-2" class="headerlink" title="遇到的问题："></a>遇到的问题：</h3><ul>
-<li>怎么样获取轴承更换之后轴承的清洗次数？在轴承更换之后，清洗次数以及清零。但我写的sql语句是根据轴承座号获取对应清洗记录里的数据有多少条，再给<code>cleanfrequency</code>中的清洗次数赋值，但是在轴承更换之后，之前的清洗数据还会存在记录表里。</li>
-</ul>
-<h3 id="解决问题思路：-2"><a href="#解决问题思路：-2" class="headerlink" title="解决问题思路："></a>解决问题思路：</h3><ul>
-<li>新建的这张数据库表就是要对创建的数据进行一个操作，从一开始调用<code>CopyCleanout</code>方法，若表中没有该轴承座号对应的数据，那么久新创建一条，如果已有该轴承座号对应的数据那么在进行判断轴承是否更换过，若更换过则给清洗次数和使用里程清零，若没有则直接对查出来的数据进行清洗次数的加1。</li>
-</ul>
-<h3 id="解决措施：-2"><a href="#解决措施：-2" class="headerlink" title="解决措施："></a>解决措施：</h3><pre class="line-numbers language-none"><code class="language-none">cleanfrequencyService.CopyCleanout(bearingnumber,cleanout);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/3.png" alt="图三"></p>
-<ul>
-<li>调用的方法这里除了要传一个轴承座号之外，还需要传一个<code>isreplace</code>字段，所以增加了一个入参，而在清洗操作是调用的方法只需要传一个轴承座号，所以另一个参数置空。</li>
-<li>红框2是初始化数据用到的方法，一旦要清洗的轴承座号数据在<code>cleanfrequency</code>中存在，那么只需要在清洗操作调用红框1方法是给<code>cleantimes</code>增1。</li>
+<h3 id="消息类型及数据格式"><a href="#消息类型及数据格式" class="headerlink" title="消息类型及数据格式"></a>消息类型及数据格式</h3><ul>
+<li>1.text类型</li>
+<li>2.link类型</li>
+<li>3.markdown类型</li>
+<li>4.整体跳转ActionCard类型</li>
+<li>5.独立跳转ActionCard类型</li>
+<li>6.FeedCard类型</li>
 </ul>
 
                 
@@ -919,7 +888,7 @@ if(assemblyDetail!=null) {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangchunjia.github.io/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/">https://zhangchunjia.github.io/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/</a>
+                    <a href="https://zhangchunjia.github.io/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/">https://zhangchunjia.github.io/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1033,9 +1002,10 @@ if(assemblyDetail!=null) {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/">
                     <div class="card-image">
@@ -1053,9 +1023,9 @@ if(assemblyDetail!=null) {
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1064,6 +1034,7 @@ if(assemblyDetail!=null) {
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -1074,13 +1045,13 @@ if(assemblyDetail!=null) {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/11/18/zhou-cheng-qing-xi-ti-shi-xu-qiu/">
+                <a href="/2022/11/25/zhou-cheng-xu-qiu-ce-shi-ji-wen-ti-xiu-gai/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="轴承清洗提示需求">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="轴承清洗测试及问题修改">
                         
-                        <span class="card-title">轴承清洗提示需求</span>
+                        <span class="card-title">轴承清洗测试及问题修改</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1091,7 +1062,7 @@ if(assemblyDetail!=null) {
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-25
                             </span>
                         <span class="publish-author">
                             
