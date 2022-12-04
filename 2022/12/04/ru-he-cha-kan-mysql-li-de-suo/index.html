@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分布式事务, CC Zhang de 菜鸟日记">
-    <meta name="description" content="项目报错报错：Response[ TransactionException[Could not found global transaction xid =xxx.xxx.xx.xxx status = Rollbacked
-原因：
-Sea">
+    <meta name="keywords" content="如何查看myql里的锁, CC Zhang de 菜鸟日记">
+    <meta name="description" content="如何查看mysql里的锁查看mysql锁
+1.查看当前有无锁等待
+mysql&amp;gt; show status like &#39;innodb
+
+2.查看哪个事务在等待(被阻塞了)
+mysql&amp;gt; select * from informati">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +22,7 @@ Sea">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分布式事务 | CC Zhang de 菜鸟日记</title>
+    <title>如何查看myql里的锁 | CC Zhang de 菜鸟日记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -770,12 +773,12 @@ Sea">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">分布式事务</h1>
+                    <h1 class="description center-align post-title">如何查看myql里的锁</h1>
                 </div>
             </div>
         </div>
@@ -835,17 +838,42 @@ Sea">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="项目报错"><a href="#项目报错" class="headerlink" title="项目报错"></a>项目报错</h2><h3 id="报错："><a href="#报错：" class="headerlink" title="报错："></a>报错：</h3><pre class="line-numbers language-none"><code class="language-none">Response[ TransactionException[Could not found global transaction xid =xxx.xxx.xx.xxx status = Rollbacked<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><ul>
-<li><code>Seata</code>的<code>AT</code>模型调用其他服务时是异步的。<code>seata</code>的全局事务超时时间设置太短了，导致注册分支事务的时候，全局事务都已经进入第二阶段了。<code>while expecting Begin</code>  描述：分支事务注册时，全局事务状态需是一阶段状态<code>begin</code>，非<code>begin</code>不允许注册。属于<code>seata</code>框架层面正常的处理，用户可以从自身业务层面解决。</li>
-<li>简单来讲这次的错误是因为打断点项目进行太长导致的超时。</li>
+                <h1 id="如何查看mysql里的锁"><a href="#如何查看mysql里的锁" class="headerlink" title="如何查看mysql里的锁"></a>如何查看mysql里的锁</h1><h2 id="查看mysql锁"><a href="#查看mysql锁" class="headerlink" title="查看mysql锁"></a>查看mysql锁</h2><ul>
+<li><p>1.查看当前有无锁等待</p>
+<pre class="line-numbers language-none"><code class="language-none">mysql&gt; show status like 'innodb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>2.查看哪个事务在等待(被阻塞了)</p>
+<pre class="line-numbers language-none"><code class="language-none">mysql&gt; select * from information_schema.INNODB_TRX WHERE trx_state='LOCK WAIT'\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>trx_state 表示该事务处于锁等待状态。</p>
+</li>
+<li><p>trx_query : 当前被阻塞的操作是select * from actor where actor_id=1 for update。</p>
+</li>
 </ul>
-<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>事务是逻辑上的一组<code>sql</code>语句，在一个事务中的<code>sql</code>语句要么一起成功，要么一起失败。<br>本地事务就是这一组sql语句在一个数据库连接中执行，即我们常说的事务就是一个本地事务，遵循ACID的。<code>@Transactional</code>是本地事务的实现方式<br>分布式事务就是这一组<code>sql</code>语句在不同的数据库连接执行。</p>
-<h3 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h3><ul>
-<li>1.分支事务是异步，全局事务无法感知它的执行进度，全局事务已进入二阶段，该异步分支才来注册</li>
-<li>2.服务a rpc 服务b超时（dubbo、feign等默认1秒超时），a上抛异常给tm，tm通知tc回滚，但是b还是收到了请求（网络延迟或rpc框架重试），然后去tc注册时发现全局事务已在回滚</li>
-<li>3.tc感知全局事务超时(@GlobalTransactional(timeoutMills = 默认60秒))，主动变更状态并通知各分支事务回滚，此时有新的分支事务来注册</li>
-<li>4.添加事务注解的方法不是第一个执行sql语句的地方，即在方法A上添加了事务注解，但是在方法A中执行sql操作之前调用了方法B，方法B属于分支事务，方法B中的sql操作在方法A的sql操作之前执行了。</li>
+<p>从trx_mysql_thread_id和trx_id可以看到这里查到当前被阻塞的事务的：</p>
+<p>线程ID是 971，注意说的是线程id</p>
+<p>事务ID是3934<br><img src="/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/1.webp"></p>
+<ul>
+<li>3.查询该事务被哪个事务给阻塞了 从innodb_trx获取到被阻塞的trx_id是3934，阻塞该事务的事务id是3933<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.threads WHERE processlist_id=970\G
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>4.根据trx_id，从innodb_trx表可查询到trx_mysql_thread_id线程id为970<pre class="line-numbers language-none"><code class="language-none">mysql&gt; select * from information_schema.innodb_trx where trx_id=3933 \G
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>5.根据线程id，查询表拿到thread_id为995<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.threads WHERE processlist_id=970\G
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>6.根据thread_id，查询当前锁源的sql<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.events_statements_current WHERE thread_id=995\G
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="整个流程如下："><a href="#整个流程如下：" class="headerlink" title="整个流程如下："></a>整个流程如下：</h3><ul>
+<li><p>（1）首先查询是否有锁，根据锁查到被锁的trx_id</p>
+</li>
+<li><p>（2）根据被锁的trx_id可以查到锁源的trx_id</p>
+</li>
+<li><p>（3）根据锁源的trx_id查到trx_mysql_thread_id</p>
+</li>
+<li><p>（4）再根据trx_mysql_thread_id查到thread_id</p>
+</li>
+<li><p>（5）最后，用thread_id查找到锁源的sql</p>
+</li>
 </ul>
 
                 
@@ -873,7 +901,7 @@ Sea">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangchunjia.github.io/2022/12/04/fen-bu-shi-shi-wu/">https://zhangchunjia.github.io/2022/12/04/fen-bu-shi-shi-wu/</a>
+                    <a href="https://zhangchunjia.github.io/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/">https://zhangchunjia.github.io/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -987,9 +1015,10 @@ Sea">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/">
                     <div class="card-image">
@@ -1007,9 +1036,9 @@ Sea">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1018,6 +1047,7 @@ Sea">
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -1028,13 +1058,13 @@ Sea">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/">
+                <a href="/2022/12/04/fen-bu-shi-shi-wu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="钉钉开放平台-自定义机器人的接入">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="分布式事务">
                         
-                        <span class="card-title">钉钉开放平台-自定义机器人的接入</span>
+                        <span class="card-title">分布式事务</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1045,7 +1075,7 @@ Sea">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-04
                             </span>
                         <span class="publish-author">
                             

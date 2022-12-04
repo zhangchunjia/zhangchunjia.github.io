@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>如何查看myql里的锁</title>
+      <link href="/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/"/>
+      <url>/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/</url>
+      
+        <content type="html"><![CDATA[<h1 id="如何查看mysql里的锁"><a href="#如何查看mysql里的锁" class="headerlink" title="如何查看mysql里的锁"></a>如何查看mysql里的锁</h1><h2 id="查看mysql锁"><a href="#查看mysql锁" class="headerlink" title="查看mysql锁"></a>查看mysql锁</h2><ul><li><p>1.查看当前有无锁等待</p><pre class="line-numbers language-none"><code class="language-none">mysql&gt; show status like 'innodb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>2.查看哪个事务在等待(被阻塞了)</p><pre class="line-numbers language-none"><code class="language-none">mysql&gt; select * from information_schema.INNODB_TRX WHERE trx_state='LOCK WAIT'\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>trx_state 表示该事务处于锁等待状态。</p></li><li><p>trx_query : 当前被阻塞的操作是select * from actor where actor_id=1 for update。</p></li></ul><p>从trx_mysql_thread_id和trx_id可以看到这里查到当前被阻塞的事务的：</p><p>线程ID是 971，注意说的是线程id</p><p>事务ID是3934<br><img src="/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/1.webp"></p><ul><li>3.查询该事务被哪个事务给阻塞了 从innodb_trx获取到被阻塞的trx_id是3934，阻塞该事务的事务id是3933<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.threads WHERE processlist_id=970\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li>4.根据trx_id，从innodb_trx表可查询到trx_mysql_thread_id线程id为970<pre class="line-numbers language-none"><code class="language-none">mysql&gt; select * from information_schema.innodb_trx where trx_id=3933 \G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li>5.根据线程id，查询表拿到thread_id为995<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.threads WHERE processlist_id=970\G<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li>6.根据thread_id，查询当前锁源的sql<pre class="line-numbers language-none"><code class="language-none">mysql&gt; SELECT * FROM performance_schema.events_statements_current WHERE thread_id=995\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="整个流程如下："><a href="#整个流程如下：" class="headerlink" title="整个流程如下："></a>整个流程如下：</h3><ul><li><p>（1）首先查询是否有锁，根据锁查到被锁的trx_id</p></li><li><p>（2）根据被锁的trx_id可以查到锁源的trx_id</p></li><li><p>（3）根据锁源的trx_id查到trx_mysql_thread_id</p></li><li><p>（4）再根据trx_mysql_thread_id查到thread_id</p></li><li><p>（5）最后，用thread_id查找到锁源的sql</p></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分布式事务</title>
       <link href="/2022/12/04/fen-bu-shi-shi-wu/"/>
       <url>/2022/12/04/fen-bu-shi-shi-wu/</url>
