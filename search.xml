@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>分布式事务</title>
+      <link href="/2022/12/04/fen-bu-shi-shi-wu/"/>
+      <url>/2022/12/04/fen-bu-shi-shi-wu/</url>
+      
+        <content type="html"><![CDATA[<h2 id="项目报错"><a href="#项目报错" class="headerlink" title="项目报错"></a>项目报错</h2><h3 id="报错："><a href="#报错：" class="headerlink" title="报错："></a>报错：</h3><pre class="line-numbers language-none"><code class="language-none">Response[ TransactionException[Could not found global transaction xid =xxx.xxx.xx.xxx status = Rollbacked<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><ul><li><code>Seata</code>的<code>AT</code>模型调用其他服务时是异步的。<code>seata</code>的全局事务超时时间设置太短了，导致注册分支事务的时候，全局事务都已经进入第二阶段了。<code>while expecting Begin</code>  描述：分支事务注册时，全局事务状态需是一阶段状态<code>begin</code>，非<code>begin</code>不允许注册。属于<code>seata</code>框架层面正常的处理，用户可以从自身业务层面解决。</li><li>简单来讲这次的错误是因为打断点项目进行太长导致的超时。</li></ul><h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>事务是逻辑上的一组<code>sql</code>语句，在一个事务中的<code>sql</code>语句要么一起成功，要么一起失败。<br>本地事务就是这一组sql语句在一个数据库连接中执行，即我们常说的事务就是一个本地事务，遵循ACID的。<code>@Transactional</code>是本地事务的实现方式<br>分布式事务就是这一组<code>sql</code>语句在不同的数据库连接执行。</p><h3 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h3><ul><li>1.分支事务是异步，全局事务无法感知它的执行进度，全局事务已进入二阶段，该异步分支才来注册</li><li>2.服务a rpc 服务b超时（dubbo、feign等默认1秒超时），a上抛异常给tm，tm通知tc回滚，但是b还是收到了请求（网络延迟或rpc框架重试），然后去tc注册时发现全局事务已在回滚</li><li>3.tc感知全局事务超时(@GlobalTransactional(timeoutMills = 默认60秒))，主动变更状态并通知各分支事务回滚，此时有新的分支事务来注册</li><li>4.添加事务注解的方法不是第一个执行sql语句的地方，即在方法A上添加了事务注解，但是在方法A中执行sql操作之前调用了方法B，方法B属于分支事务，方法B中的sql操作在方法A的sql操作之前执行了。</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>钉钉开放平台-自定义机器人的接入</title>
       <link href="/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/"/>
       <url>/2022/11/27/ding-ding-zi-ding-yi-ji-qi-ren/</url>
