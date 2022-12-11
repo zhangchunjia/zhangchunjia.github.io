@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>java-远程调试-remote-java-application</title>
+      <link href="/2022/12/11/java-yuan-cheng-diao-shi-remote-java-application/"/>
+      <url>/2022/12/11/java-yuan-cheng-diao-shi-remote-java-application/</url>
+      
+        <content type="html"><![CDATA[<h1 id="java-远程调试-remote-java-application"><a href="#java-远程调试-remote-java-application" class="headerlink" title="java-远程调试-remote-java-application"></a>java-远程调试-remote-java-application</h1><h2 id="步骤调试"><a href="#步骤调试" class="headerlink" title="步骤调试"></a>步骤调试</h2><p><img src="/2022/12/11/java-yuan-cheng-diao-shi-remote-java-application/1.png" alt="示例"></p><ul><li>1.在本地<code>eclipse</code>中，打开<code>debug configuration</code>，在弹出的窗口中，点击左边的<code>remote java application</code>。</li><li>2.在右边的窗口中，输入项目名称、远程主机的地址和端口号。</li><li>3.端口号可以从远程主机的<code>tomcat</code>文件夹下面的<code>catalina.sh</code>中获得，打开<code>catalina.sh</code>文件，找到<code>declare -x CATALINA_OPTS="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8787</code>的描述。</li><li>4.<code>8787</code>就是要输入的端口号。</li><li>5.最后运行，并打上断点。</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何查看myql里的锁</title>
       <link href="/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/"/>
       <url>/2022/12/04/ru-he-cha-kan-mysql-li-de-suo/</url>
